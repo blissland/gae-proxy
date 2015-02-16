@@ -20,15 +20,21 @@ from google.appengine.api import memcache
 from google.appengine.api import urlfetch
 import webapp2
 
-CACHE_EXPIRATION = 60 * 60 * 24  # 1 day
+CACHE_EXPIRATION = 60 * 30 # 1/2 hour
 
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+
+        headers = self.request.headers
+        if not ('origin' in headers) or headers['origin'] != 'blissflixx':
+            self.response.set_status(403)
+            return
+
         url = self.request.get('url')
         callback = self.request.get('callback', None)
-        if not url.startswith('http://'):
-            url = 'http://%s' % url
+#        if not url.startswith('http://'):
+#            url = 'http://%s' % url
 
         content = memcache.get(url)
         headers = memcache.get('%s:headers' % url)
