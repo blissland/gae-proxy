@@ -41,9 +41,10 @@ class MainHandler(webapp2.RequestHandler):
                 form_fields[v] = k.encode('utf-8')
         form_data = urllib.urlencode(form_fields)
 
+        headers['Content-Type'] = 'application/x-www-form-urlencoded'
         result = urlfetch.fetch(url=url,
                  payload=form_data, method=urlfetch.POST, deadline=60,
-                 headers={'Content-Type': 'application/x-www-form-urlencoded'})
+                 headers=headers)
         if result.status_code != 200:
             result.content = 'Cannot POST %s' % url
         self.generate_response(result.content, result.headers, result.status_code)
@@ -66,7 +67,7 @@ class MainHandler(webapp2.RequestHandler):
             self.generate_response(content, headers, status, callback)
         else:
             logging.info('cache miss')
-            result = urlfetch.fetch(url, deadline=60)
+            result = urlfetch.fetch(url, headers=self.request.headers, deadline=60)
             if result.status_code != 200:
                 result.content = 'Cannot GET %s' % url
 
