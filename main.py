@@ -57,6 +57,12 @@ class MainHandler(webapp2.RequestHandler):
             return
 
         url = self.request.get('url')
+
+        if url.startswith("https://yts.re"):
+          url = "https://yts.to" + url[14:]
+        elif url.startswith("https://thepiratebay.se"):
+          url = "https://thepiratebay.am" + url[23:]
+
         callback = self.request.get('callback', None)
 
         content = memcache.get(url)
