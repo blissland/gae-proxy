@@ -58,7 +58,7 @@ class MainHandler(webapp2.RequestHandler):
 
         url = self.request.get('url')
 
-        if url.startswith("https://yts.re"):
+        if url.startswith("https://yts"):
           url = "https://yts.to" + url[14:]
         elif url.startswith("https://thepiratebay"):
           url = "https://thepiratebay.gd" + url[23:]
@@ -74,14 +74,12 @@ class MainHandler(webapp2.RequestHandler):
         else:
             logging.info('cache miss')
             result = urlfetch.fetch(url, headers=self.request.headers, deadline=60)
-            if result.status_code != 200:
-                result.content = 'Cannot GET %s' % url
-
             self.generate_response(result.content, result.headers, result.status_code, callback)
 
-            memcache.set(url, result.content, CACHE_EXPIRATION)
-            memcache.set('%s:headers' % url, result.headers, CACHE_EXPIRATION)
-            memcache.set('%s:status' % url, result.status_code, CACHE_EXPIRATION)
+            if result.status_code == 200:
+	      memcache.set(url, result.content, CACHE_EXPIRATION)
+	      memcache.set('%s:headers' % url, result.headers, CACHE_EXPIRATION)
+	      memcache.set('%s:status' % url, result.status_code, CACHE_EXPIRATION)
 
 
     def generate_response(self, content, headers, status, callback=None):
