@@ -62,6 +62,10 @@ class MainHandler(webapp2.RequestHandler):
           url = "https://yts.to" + url[14:]
         elif url.startswith("https://thepiratebay"):
           url = "https://thepiratebay.gd" + url[23:]
+        elif url.startswith("http://kat"):
+          url = "http://kickass.ytsre.net" + url[13:]
+        elif url.startswith("https://kat"):
+          url = "http://kickass.ytsre.net" + url[14:]
 
         callback = self.request.get('callback', None)
 
