@@ -59,7 +59,7 @@ class MainHandler(webapp2.RequestHandler):
         url = self.request.get('url')
 
         if url.startswith("https://yts"):
-          url = "https://yts.to" + url[14:]
+          url = "https://yts.ag" + url[14:]
         elif url.startswith("https://thepiratebay"):
           url = "https://thepiratebay.gd" + url[23:]
         elif url.startswith("http://kat"):
