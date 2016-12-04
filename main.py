@@ -61,11 +61,15 @@ class MainHandler(webapp2.RequestHandler):
         if url.startswith("https://yts"):
           url = "https://yts.ag" + url[14:]
         elif url.startswith("https://thepiratebay"):
-          url = "https://thepiratebay.gd" + url[23:]
+          #url = "https://thepiratebay.se" + url[23:]
+          url = "https://pirateproxy.red" + url[23:]
         elif url.startswith("http://kat"):
-          url = "http://kickass.ytsre.net" + url[13:]
+          url = "https://kickass.unblocked.red/" + url[13:]
         elif url.startswith("https://kat"):
-          url = "http://kickass.ytsre.net" + url[14:]
+          url = "https://kickass.unblocked.red/" + url[14:]
+        elif url.startswith("http://1337x.to"):
+          self.response.set_status(403)
+          return
 
         callback = self.request.get('callback', None)
 
