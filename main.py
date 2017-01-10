@@ -67,6 +67,8 @@ class MainHandler(webapp2.RequestHandler):
           url = "https://kickass.unblocked.red/" + url[13:]
         elif url.startswith("https://kat"):
           url = "https://kickass.unblocked.red/" + url[14:]
+        elif url.startswith("https://eztv.ag"):
+          url = "http://eztv.unlockme.space" + url[15:]
         elif url.startswith("http://1337x.to"):
           self.response.set_status(403)
           return
