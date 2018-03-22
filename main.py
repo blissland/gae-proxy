@@ -61,14 +61,14 @@ class MainHandler(webapp2.RequestHandler):
         if url.startswith("https://yts"):
           url = "https://yts.ag" + url[14:]
         elif url.startswith("https://thepiratebay"):
-          #url = "https://thepiratebay.se" + url[23:]
-          url = "https://pirateproxy.red" + url[23:]
+          #url = "https://piratebayproxy.in" + url[23:]
+          url = "https://tpb.zone" + url[23:]
         elif url.startswith("http://kat"):
           url = "https://kickass.unblocked.red/" + url[13:]
         elif url.startswith("https://kat"):
           url = "https://kickass.unblocked.red/" + url[14:]
         elif url.startswith("https://eztv.ag"):
-          url = "http://eztv.unlockme.space" + url[15:]
+          url = "https://eztv.wf" + url[15:]
         elif url.startswith("http://1337x.to"):
           self.response.set_status(403)
           return
